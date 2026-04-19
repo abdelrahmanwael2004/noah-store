@@ -5,98 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر نوح - Noah Store</title>
     <style>
-        /* إعدادات الألوان - تم سحب الدرجة بدقة من خلفية الصورة */
-        :root {
-            --noah-blue: #32657a; 
-            --gold-accent: #c5a059;
-            --dark-blue: #1a3a47;
-        }
-
+        /* إعدادات التنسيق الأساسي للموقع */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f4f4f4;
+            color: #333;
         }
 
-        /* الهيدر مع Zoom Out إضافي */
+        /* الهيدر اللي طلبته بالظبط مع رابط الصورة */
         header {
-            /* اللون ده هو اللي بيملا الفراغات حوالين الصورة */
-            background-color: var(--noah-blue);
-            
-            /* رابط الصورة المباشر */
-            background-image: url('https://i.postimg.cc/4NrGNMvM/Gemini-Generated-Image-x4kvxlx4kvxlx4kv.png');
-            
-            /* تقليل الحجم لـ 80% لعمل Zoom Out وإظهار التفاصيل */
-            background-size: 80% auto;
-            
-            background-position: center;
-            background-repeat: no-repeat;
-            
-            /* ارتفاع الهيدر */
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://i.postimg.cc/4NrGNMvM/Gemini-Generated-Image-x4kvxlx4kvxlx4kv.png'); 
+            background-size: cover; 
+            background-position: center; 
             height: 450px; 
-            width: 100%;
             display: flex; 
+            flex-direction: column;
             align-items: center; 
             justify-content: center; 
-            border-bottom: 5px solid var(--gold-accent);
+            text-align: center;
+            color: white; 
+            border-bottom: 5px solid #c5a059;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        /* تنسيق الموبايل - عشان الصورة متصغرش زيادة عن اللزوم */
-        @media (max-width: 768px) {
-            header {
-                background-size: 95% auto;
-                height: 300px;
-            }
-        }
-
-        /* شريط التنقل */
+        /* شريط التنقل العلوي */
         nav {
-            background-color: var(--dark-blue);
+            background-color: #111;
             padding: 15px 0;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         nav a {
-            color: var(--gold-accent);
+            color: #c5a059;
             text-decoration: none;
             margin: 0 20px;
             font-weight: bold;
             font-size: 18px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: white;
         }
 
-        /* قسم المنتجات */
+        /* تنسيق قسم المنتجات */
         .container {
-            padding: 50px 20px;
+            padding: 40px 20px;
             max-width: 1200px;
             margin: auto;
         }
         .section-title {
             text-align: center;
-            color: var(--dark-blue);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #111;
         }
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
         .product-card {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             text-align: center;
-            padding: 20px;
+            padding-bottom: 20px;
             border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #c5a059;
+        }
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .price {
+            color: #27ae60;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
         }
         .btn-add {
-            background-color: var(--dark-blue);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            background-color: #111;
+            color: #c5a059;
+            border: 2px solid #c5a059;
+            padding: 10px 25px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-add:hover {
+            background-color: #c5a059;
+            color: white;
         }
     </style>
 </head>
@@ -106,21 +115,21 @@
 
     <nav>
         <a href="#">الرئيسية</a>
-        <a href="#">المنظفات</a>
-        <a href="#">العطور</a>
+        <a href="#">قسم المنظفات</a>
+        <a href="#">قسم العطور</a>
         <a href="#">تواصل معنا</a>
     </nav>
 
     <div class="container">
-        <h2 class="section-title">منتجات براند نوح</h2>
+        <h2 class="section-title">أحدث منتجات نوح</h2>
         <div class="products-grid">
             <div class="product-card">
-                <img src="https://via.placeholder.com/300x200/32657a/ffffff?text=Noah+Product" alt="منتج" style="width:100%; border-radius:10px;">
-                <h3>اسم المنتج</h3>
-                <p style="color: #27ae60; font-weight: bold;">السعر: 150 ج.م</p>
+                <img src="https://via.placeholder.com/300x250/111/c5a059?text=Noah+Product" alt="منتج">
+                <h3>اسم المنتج هنا</h3>
+                <p class="price">250 ج.م</p>
                 <button class="btn-add">أضف للسلة</button>
             </div>
-        </div>
+            </div>
     </div>
 
 </body>
