@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر نوح - طلبات أونلاين</title>
+    <style>
+        :root { --primary: #1a252f; --gold: #c5a059; --bg: #f8f9fa; }
+        body { font-family: 'Arial', sans-serif; margin: 0; background: var(--bg); color: #333; }
+        header { background: var(--primary); color: white; padding: 30px; text-align: center; border-bottom: 4px solid var(--gold); }
+        .logo-text { font-size: 32px; color: var(--gold); margin: 0; letter-spacing: 2px; }
+        
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        .card img { max-width: 100%; border-radius: 8px; height: 180px; object-fit: cover; }
+        .price { display: block; font-size: 22px; color: #27ae60; margin: 15px 0; font-weight: bold; }
+        
+        .btn { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        .btn:hover { background: var(--gold); color: var(--primary); }
+
+        /* سلة المشتريات */
+        .cart-panel { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); display: flex; justify-content: space-around; align-items: center; border-top: 3px solid var(--gold); }
+        .btn-order { background: #25d366; color: white; padding: 10px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="logo-text">NOAH - نوح</h1>
+    <p>للمنظفات والعطور الراقية</p>
+</header>
+
+<div class="container">
+    <h2 style="text-align:center; margin-bottom:30px;">منتجاتنا المختارة</h2>
+    
+    <div class="grid">
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200?text=Noah+Perfume" alt="عطر نوح">
+            <h3>عطر نوح (البراند الخاص)</h3>
+            <span class="price">450 ج.م</span>
+            <button class="btn" onclick="addToCart('عطر نوح', 450)">أضف للسلة</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200?text=Detergent" alt="منظف">
+            <h3>منظف ملابس لافندر - 3 لتر</h3>
+            <span class="price">120 ج.م</span>
+            <button class="btn" onclick="addToCart('منظف ملابس لافندر', 120)">أضف للسلة</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200?text=Deo" alt="مزيل">
+            <h3>مزيل عرق نوح فريش</h3>
+            <span class="price">85 ج.م</span>
+            <button class="btn" onclick="addToCart('مزيل عرق نوح', 85)">أضف للسلة</button>
+        </div>
+    </div>
+</div>
+
+<div class="cart-panel">
+    <div>إجمالي الطلب: <span id="total-price" style="font-weight:bold; color:#27ae60;">0</span> ج.م</div>
+    <button class="btn-order" onclick="sendToWhatsApp()">إتمام الطلب عبر واتساب ✅</button>
+</div>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        total += price;
+        document.getElementById('total-price').innerText = total;
+    }
+
+    function sendToWhatsApp() {
+        if (cart.length === 0) {
+            alert("السلة فارغة! اختر بعض المنتجات أولاً.");
+            return;
+        }
+
+        // --- تعديل رقم الموبايل هنا ---
+        let myNumber = "20111730680"; // حط رقمك هنا بالكود الدولي
+        
+        let message = "طلب جديد من متجر نوح:\n\n";
+        cart.forEach((item, index) => {
+            message += `${index + 1}- ${item.name} (${item.price} ج.م)\n`;
+        });
+        message += `\nإجمالي الحساب: ${total} ج.م`;
+        message += "\n\nبرجاء تأكيد الطلب ومعرفة موعد التوصيل.";
+
+        let encodedMessage = encodeURIComponent(message);
+        let whatsappUrl = `https://wa.me/${myNumber}?text=${encodedMessage}`;
+        
+        window.open(whatsappUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
