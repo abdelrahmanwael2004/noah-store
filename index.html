@@ -33,16 +33,17 @@
         }
 
         /* --- إعدادات الموبايل (عشان يفضل مظبوط) --- */
-        @media (max-width: 768px) {
-    .header-container {
-        height: 300px; /* جرب تصغر الارتفاع هنا، ده هيقلل الزووم تلقائياً */
-    }
-    .header-container img {
-        width: 100%; 
-        object-fit: contain; /* جرب دي وشوف لو اللوجو بقى أوضح والحواف مقبولة */
-        background-color: #032e3b; /* عشان لو ظهر حواف تكون بنفس اللون */
-    }
-}
+      @media (max-width: 768px) {
+            .header-container {
+                height: 45vh; /* 45vh يعني تاخد تقريباً نص طول شاشة الموبايل مهما كان نوعه */
+            }
+            .header-container img {
+                width: 100%; 
+                height: 100%;
+                object-fit: cover; /* ده الأمر اللي هيخليها تفرش وتملأ الـ 300 بكسل كاملين */
+                object-position: center center; /* بيخلي نص الصورة هو اللي في نص الشاشة */
+            }
+        }
 
         /* باقي التنسيقات (المنيو والمنتجات) */
         nav { background-color: #111; padding: 15px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
