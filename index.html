@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر نوح - ملفت</title>
-
     <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/4NrGNMvM/Gemini-Generated-Image-x4kvxlx4kvxlx4kv.png">
 
     <style>
@@ -13,43 +12,32 @@
             background-color: #f4f4f4; color: #333; scroll-behavior: smooth;
         }
 
-        /* --- حل مشكلة الهيدر (الأبعاد والزوم) --- */
+        /* --- الحل النهائي لمشكلة الحواف والزوم --- */
         .header-container {
-            background-color: #032e3b; /* نفس درجة كحلي الصورة */
+            /* دمج لون الخلفية مع الصورة لمنع ظهور أي حواف */
+            background-color: #032e3b; 
+            background-image: url('https://i.postimg.cc/4NrGNMvM/Gemini-Generated-Image-x4kvxlx4kvxlx4kv.png');
+            
+            /* تظهر الصورة كاملة دائماً وتتوسط المساحة */
+            background-size: contain; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            
             width: 100%;
-            /* النسبة السحرية: تحافظ على أبعاد الصورة (عرض / طول) وتمنع الحواف */
-            aspect-ratio: 1920 / 480; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            /* نسبة العرض للارتفاع لضمان مرونة الهيدر */
+            aspect-ratio: 16 / 5; 
             border-bottom: 4px solid #c5a059;
         }
 
-        .header-container img {
-            width: 100%;
-            height: 100%;
-            /* object-fit: cover تضمن ملء الشاشة بدون حواف بيضاء في الكمبيوتر */
-            object-fit: cover; 
-            object-position: center;
-            display: block;
-        }
-
-        /* --- تصميم الهيدر للموبايل --- */
+        /* تعديلات الموبايل لزيادة وضوح اللوجو */
         @media (max-width: 768px) {
             .header-container {
-                /* نغير النسبة لتصبح الصورة أوضح في الموبايل */
                 aspect-ratio: 4 / 3; 
-                height: auto; /* نجعل الارتفاع مرن بناءً على النسبة */
-            }
-            .header-container img {
-                /* object-fit: contain يضمن ظهور اللوجو والمنتجات كاملة في الموبايل */
-                object-fit: contain; 
-                background-color: #032e3b; 
+                background-size: contain;
             }
         }
 
-        /* --- شريط التنقل (Menu) --- */
+        /* --- شريط التنقل --- */
         nav {
             background-color: #111; padding: 15px 0; text-align: center;
             position: sticky; top: 0; z-index: 1000;
@@ -62,49 +50,37 @@
 
         /* --- حاوية المنتجات --- */
         .container { padding: 40px 20px; max-width: 1200px; margin: auto; }
-        .section-title { text-align: center; margin-bottom: 30px; font-size: 28px; color: #111; }
-        
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 28px; }
         .products-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; }
 
         /* --- كارت المنتج --- */
         .product-card {
             background: white; border-radius: 12px; overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center;
-            padding-bottom: 25px; border: 1px solid #eee; transition: 0.3s;
-            width: 350px; max-width: 100%;
+            padding-bottom: 25px; width: 350px; max-width: 100%;
+            transition: transform 0.3s;
         }
+        .product-card:hover { transform: translateY(-5px); }
 
-        .image-container {
-            position: relative; width: 100%; height: 350px;
-            background-color: #fff; cursor: pointer;
-        }
-        .image-container img {
-            width: 100%; height: 100%; object-fit: contain;
-            position: absolute; top: 0; left: 0;
-            transition: opacity 0.6s ease-in-out; padding: 15px;
-        }
-        .img-back { opacity: 0; }
-        
-        .product-card:hover .img-back { opacity: 1; }
-        .product-card:hover .img-front { opacity: 0; }
+        .image-container { position: relative; width: 100%; height: 350px; padding: 15px; box-sizing: border-box; }
+        .image-container img { width: 100%; height: 100%; object-fit: contain; }
 
         .price { color: #27ae60; font-size: 26px; font-weight: bold; margin: 15px 0; }
         
         .btn-add {
             background-color: #111; color: #c5a059; border: 2px solid #c5a059;
-            padding: 12px 35px; border-radius: 5px; cursor: pointer;
-            font-weight: bold; transition: 0.3s; text-decoration: none; display: inline-block;
-            font-size: 18px;
+            padding: 12px 35px; border-radius: 5px; text-decoration: none; 
+            font-weight: bold; transition: 0.3s;
         }
         .btn-add:hover { background-color: #c5a059; color: white; }
 
-        /* --- التذييل (Footer) --- */
-        .contact-footer {
-            background-color: #111; color: white; padding: 50px 20px;
-            text-align: center; margin-top: 50px; border-top: 5px solid #c5a059;
+        /* --- التذييل --- */
+        .contact-footer { 
+            background-color: #111; color: white; padding: 50px 20px; 
+            text-align: center; border-top: 5px solid #c5a059; 
         }
         .phone-link {
-            display: block; color: #c5a059; font-size: 26px;
+            display: block; color: #c5a059; font-size: 28px;
             text-decoration: none; font-weight: bold; margin-top: 15px;
         }
 
@@ -112,18 +88,15 @@
         .whatsapp-float {
             position: fixed; bottom: 25px; left: 25px; background-color: #25d366;
             color: white; width: 60px; height: 60px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 1000; transition: 0.3s;
-            text-decoration: none; font-size: 30px;
+            display: flex; align-items: center; justify-content: center; 
+            text-decoration: none; font-size: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            z-index: 1000;
         }
-        .whatsapp-float:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <img src="https://i.postimg.cc/4NrGNMvM/Gemini-Generated-Image-x4kvxlx4kvxlx4kv.png" alt="براند نوح">
-    </div>
+    <div class="header-container"></div>
 
     <nav>
         <a href="#">الرئيسية</a>
@@ -136,25 +109,23 @@
         <div class="products-grid">
             <div class="product-card">
                 <div class="image-container">
-                    <img src="https://i.postimg.cc/Y2JJBFxK/lqtt-shasht-2026-04-19-084935.png" class="img-front" alt="منتج نوح">
-                    <img src="https://i.postimg.cc/kgyZSpPd/lqtt-shasht-2026-04-19-085201.png" class="img-back" alt="منتج نوح ظهر">
+                    <img src="https://i.postimg.cc/Y2JJBFxK/lqtt-shasht-2026-04-19-084935.png" alt="منتج نوح">
                 </div>
                 <h3>معطر بخاخ فريدا المميز</h3>
-                <p style="color: #888; font-size: 12px;">(المس الصورة لرؤية الظهر)</p>
                 <p class="price">55 ج.م</p>
-                <a href="https://wa.me/201211333333?text=ارغب%20في%20طلب%20معطر%20فريدا" class="btn-add">اطلب الآن عبر واتساب</a>
+                <a href="https://wa.me/201117306850?text=أرغب%20في%20طلب%20منتج%20من%20نوح" class="btn-add">اطلب الآن عبر واتساب</a>
             </div>
         </div>
     </div>
 
     <footer class="contact-footer" id="contact">
         <h3>تواصل معنا</h3>
-        <p>للاستفسار والطلبات اتصل بنا:</p>
-        <a href="tel:+201211333333" class="phone-link">01211333333</a>
+        <p>للاستفسار والطلبات اتصل بنا على:</p>
+        <a href="tel:+201117306850" class="phone-link">01117306850</a>
     </footer>
 
-    <a href="https://wa.me/201211333333" class="whatsapp-float" target="_blank">
-        <span style="color: white; font-weight: bold;">W</span>
+    <a href="https://wa.me/201117306850" class="whatsapp-float" target="_blank" title="تواصل معنا عبر واتساب">
+        <span style="font-family: sans-serif; font-weight: bold;">W</span>
     </a>
 
 </body>
