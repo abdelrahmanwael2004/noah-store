@@ -13,31 +13,35 @@
         }
 
  /* --- الهيدر المرن (Responsive & No Cropping) --- */
-       .header-container {
-            /* 1. اللون السحري: لازم يكون مطابق لأطراف صورتك الكحلية */
-            background-color: #032e3b; 
-            
-            /* 2. رابط الصورة */
+     /* --- الحل النهائي والقطعي (الكمبيوتر Cover / الموبايل Contain) --- */
+        .header-container {
+            background-color: #032e3b; /* كحلي الصورة */
             background-image: url('https://i.postimg.cc/4NrGNMvM/Gemini-Generated-Image-x4kvxlx4kvxlx4kv.png');
             
-            /* 3. الإعدادات الذهبية لضمان المرونة وعدم القص */
-            background-size: contain;    /* يمنع الزوم ويحافظ على العناصر كاملة */
-            background-position: center; /* يخلي اللوجو دايماً في نص الشاشة */
-            background-repeat: no-repeat; /* يمنع تكرار الصورة في الشاشات العريضة */
+            /* في الكمبيوتر: الصورة هتملا الهيدر بالكامل (مستحيل تظهر حواف) */
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
             
-            /* 4. جعل الارتفاع مرن مع العرض */
             width: 100%;
-            aspect-ratio: 16 / 4.5; /* النسبة المثالية لصورتك */
-            height: auto;
-            
+            height: 450px; /* ارتفاع ثابت ومريح للعين في الكمبيوتر */
             border-bottom: 4px solid #c5a059;
+            transition: all 0.3s ease; /* نعومة في الانتقال */
         }
 
-        /* تعديل للموبايل لضمان عدم ظهور صغر حجم اللوجو */
+        /* --- تعديل ذكي للموبايل والشاشات الصغيرة --- */
         @media (max-width: 768px) {
             .header-container {
-                aspect-ratio: 16 / 9; /* بنزود الارتفاع شوية في الموبايل */
-                background-size: contain;
+                height: 250px; /* نصغر الارتفاع في الموبايل */
+                background-size: contain; /* هنا نرجعها contain عشان اللوجو والمنتجات تظهر كاملة */
+                background-position: center;
+            }
+        }
+
+        /* إضافة لمسة احترافية لشاشات اللابتوب المتوسطة */
+        @media (min-width: 769px) and (max-width: 1100px) {
+            .header-container {
+                height: 350px;
             }
         }
         /* --- شريط التنقل --- */
